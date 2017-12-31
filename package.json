@@ -1,0 +1,19 @@
+{
+  "name": "mailer",
+  "version": "1.0.0",
+  "description": "Mailing service to schedule mail notification by dates",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ossaija ThankGod <codebugsolved@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "4.0.0",
+    "joi": "13.0.2",
+    "moment": "2.20.1",
+    "nodemailer": "4.4.1",
+    "nodemailer-mailgun-transport": "1.3.6",
+    "readline2": "1.0.1"
+  }
+}
