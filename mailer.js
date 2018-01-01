@@ -62,6 +62,9 @@ function hibernate () {
 }
 
 function listenOnNotificatioinEvents () {
+  notification.eventBus.on('mailError', data => {
+    dequeue(data.mail)  
+  })
   notification.eventBus.on('mailSent', mail => {
     dequeue(mail)
   })

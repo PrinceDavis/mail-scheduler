@@ -31,7 +31,7 @@ const mailService = {
     mailOptions.subject = subject
     this.transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
-        return notification.eventBus.fire('mailError', err)
+        return notification.eventBus.fire('mailError', {err, mail})
       }
       notification.eventBus.fire('mailSent', mail)
     })

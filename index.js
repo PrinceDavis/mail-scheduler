@@ -32,9 +32,14 @@ stream.on('line', function (line) {
   }
 })
 
-// process failed mails
+// process failed mails due time elapsing
 notification.eventBus.on('mailFailed', mail => {
   console.log(`Sending ${mail.content} to ${mail.to} failed: ${mail.failReason}`)
+})
+
+// process failed mails due to error 
+notification.eventBus.on('mailError', data => {
+  console.log(`Sending ${data.mail.content} to ${data.mail.to} failed: ${mail.err.message}`)
 })
 
 // process sent mails
