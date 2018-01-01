@@ -3,7 +3,7 @@ require('dotenv').config()
 const readline = require('readline2')
 const mailer = require('./mailer')()
 const notification = require('./notification-service')
-const config = require('./config')
+
 
 // create stream from stdin
 const stream = readline.createInterface({
@@ -17,7 +17,7 @@ stream.on('line', function (line) {
   try {
     const input = JSON.parse(line)
     if (Array.isArray(input)) {
-      mailer.processMailsFrom(input)
+      mailer.processMailsFromTimeline(input)
       console.log('Mail scheduling complete')
     }else if (input.hasOwnProperty('to')) {
       mailer.setDefaultReciever(input.to)

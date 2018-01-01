@@ -14,6 +14,16 @@ function init () {
   listenOnNotificatioinEvents()
 }
 
+function processMailsFromTimeline (timeline) {
+  timeline.forEach(mail => {
+    mail.date = moment(mail.date).valueOf()
+    mail.to = mail.to ? mail.to : receiver
+    queue.push(mail)
+    permanentStore.push(mail)
+  })
+  scheduleMails()
+}
+
 function scheduleMails () {
   while (queue.length) {
     const mail = queue.shift()
@@ -29,18 +39,6 @@ function scheduleMails () {
     }, mail.date - currentTime)
   }
 }
-
-function processMailsFrom (timeline) {
-  timeline.forEach(mail => {
-    mail.date = moment(mail.date).valueOf()
-    mail.to = mail.to ? mail.to : receiver
-    queue.push(mail)
-    permanentStore.push(mail)
-  })
-  scheduleMails()
-}
-
-
 
 function setDefaultReciever (email) {
   receiver = email
@@ -73,16 +71,31 @@ function dequeue (mail) {
   let index = permanentStore.indexOf(mail)
   if (index !== -1) {
     permanentStore.splice(index, 1)
-    console.log('mails still in store', permanentStore.length)
   }
+}
+
+function getStore () {
+  return permanentStore
+}
+
+function getReceiver () {
+  return receiver
 }
 
 module.exports = () => {
   init()
 
   return {
-    processMailsFrom: processMailsFrom,
+    processMailsFromTimeline: processMailsFromTimeline,
     setDefaultReciever: setDefaultReciever,
-    hibernate: hibernate
+    hibernate: hibernate,
+    testObject: {
+      getStore: getStore,
+      getReceiver: getReceiver,
+      processMailsFromTimeline: processMailsFromTimeline,
+      sheduleMails: scheduleMails,
+      setDefaultReciever: setDefaultReciever,
+      dequeue: dequeue
+    }
   }
 }
