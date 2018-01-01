@@ -4,7 +4,6 @@ const readline = require('readline2')
 const mailer = require('./mailer')()
 const notification = require('./notification-service')
 
-
 // create stream from stdin
 const stream = readline.createInterface({
   input: process.stdin,
@@ -29,7 +28,7 @@ stream.on('line', function (line) {
     console.log(err.message)
     console.log('input not of the right format, see right format below:')
     console.log('To set default receiver: {"to": "email"}')
-    console.log('To send timeline example: [{"content": "hello world", "date": "2017-12-31T14:11:01.264Z", "to": "codebugsolved@gmail.com"}]')
+    console.log('To send timeline example: [{"content": "hello Joshua", "date": "2017-12-31T14:11:01.264Z", "to": "josh@generationenterprise.org"}, {"content": "hello tg", "date": "2018-01-01T02:17:29.254Z", "to": "codebugsolved@gmail.com"}]')
   }
 })
 
